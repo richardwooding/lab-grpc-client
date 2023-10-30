@@ -1,0 +1,48 @@
+syntax = "proto3";
+option go_package = "github.com/spandigital/lab-grpc-server/maths";
+
+// The maths service definition.
+service Maths {
+  rpc Fibonacci(FibonacciRequest) returns (FibonacciResponse) {}
+  rpc Factorial(FactorialRequest) returns (FactorialResponse) {}
+  rpc Count(Counter) returns (stream CounterResult) {}
+}
+
+// fibonacci
+message FibonacciRequest {
+  uint64 number = 1;
+}
+
+// fibonacci
+message FibonacciResponse {
+  uint64 number = 1;
+}
+
+// factorial
+message FactorialRequest {
+  uint64 number = 1;
+}
+
+// factorial
+message FactorialResponse {
+  uint64 number = 1;
+}
+
+enum Comparison {
+  equalTo = 0;
+  notEqualTo = 1;
+  lessThan = 2;
+  lessThanOrEqualTo = 3;
+  greaterThan = 4;
+  greaterThanOrEqualTo = 5;
+}
+
+message Counter {
+  sint64 initialValue = 1;
+  Comparison comparison = 2;
+  sint64 increment = 5;
+  sint64 value = 6;
+}
+message CounterResult {
+  sint64 number = 1;
+}
